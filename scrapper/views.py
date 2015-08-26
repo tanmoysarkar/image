@@ -9,7 +9,7 @@ def home(request):
     template = loader.get_template('home.html')
     c = {}
     h = {}
-    z = []
+    z = {}
     if request.POST:
         url = request.POST["url"]
         r = requests.get(url)
