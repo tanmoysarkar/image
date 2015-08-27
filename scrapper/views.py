@@ -17,7 +17,7 @@ def home(request):
         c = tree.xpath('//img/@src')
         h = tree.xpath('//a/@href')
         for x in c:
-            if bool(urlparse3.urlparse3(x).netloc):
+            if bool(urlparse3.parse_url(x).netloc):
                 z.append(x)
             else:
                 z.append(str(url) + str(x))
