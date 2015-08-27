@@ -4,14 +4,14 @@ from django.template import RequestContext, loader
 from lxml import html
 import requests
 
-from urllib import urlparse
+from urllib.parse import urlparse
 
 
 def home(request):
     template = loader.get_template('home.html')
     c = {}
     h = {}
-    z = {}
+    z = []
     if request.POST:
         url = request.POST["url"]
         r = requests.get(url)
