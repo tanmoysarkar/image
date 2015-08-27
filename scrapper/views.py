@@ -3,13 +3,15 @@ from django.http import HttpResponse
 from django.template import RequestContext, loader
 from lxml import html
 import requests
-import urlparse3
+
+from urllib.parse import urlparse
+
 
 def home(request):
     template = loader.get_template('home.html')
     c = {}
     h = {}
-    z = {}
+    z = []
     if request.POST:
         url = request.POST["url"]
         r = requests.get(url)
@@ -17,10 +19,11 @@ def home(request):
         c = tree.xpath('//img/@src')
         h = tree.xpath('//a/@href')
         for x in c:
-            if bool(urlparse3.parse_url(x).netloc):
+            if bool(urlparse(x).netloc):
                 z.append(x)
             else:
                 z.append(str(url) + str(x))
 
     return render_to_response("home.html", {'h': h, 'z' : z}, context_instance=RequestContext(request))
                                    
+
